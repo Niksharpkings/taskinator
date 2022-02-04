@@ -122,7 +122,8 @@ var completeEditTask = function(taskName, taskType, taskId) {
     }
   };
 
-  localStorage.setItem("tasks", JSON.stringify(tasks));
+  // save to localStorage
+  saveTasks();
 
   alert("Task Updated!");
 
@@ -173,7 +174,8 @@ var taskStatusChangeHandler = function(event) {
     }
   }
 
-  localStorage.setItem("tasks", JSON.stringify(tasks));
+  // save to localStorage
+  saveTasks();
 };
 
 var editTask = function(taskId) {
@@ -219,7 +221,8 @@ var deleteTask = function(taskId) {
   //reassign tasks array to be the same as updatedTaskArr
   tasks = updatedTaskArr;
 
-  localStorage.setItem("tasks", JSON.stringify(tasks));
+  // save to localStorage
+  saveTasks();
 };
 
 var saveTasks = function() {
@@ -231,7 +234,8 @@ var loadTasks = function() {
   if (!savedTasks) {
     return false;
   }
-
+  console.log("Saved tasks found!");
+  // else, load up saved tasks
   savedTasks = JSON.parse(savedTasks); 
   
   //loop through savedTasks array
@@ -251,3 +255,5 @@ pageContentEl.addEventListener("click", taskButtonHandler);
 
 // for changing the status
 pageContentEl.addEventListener("change", taskStatusChangeHandler);
+
+loadTasks();
